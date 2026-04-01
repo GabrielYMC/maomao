@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>毛毛先生</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#FAF7F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/icons/icon-192.svg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+<!-- MOBILE HEADER (hidden on desktop) -->
+<div class="mobile-header">
+  <button class="hamburger-btn" id="hamburger-btn">☰</button>
+  <div class="logo-name">毛毛先生</div>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-name">毛毛先生</div>
+      </div>
+      <div class="logo-sub">嗨佳穎，今天也要加油 ☀️</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">功能</div>
+      <div class="nav-item active" data-view="dashboard"><div class="nav-dot" style="background:var(--accent-coral)"></div>今日總覽</div>
+      <div class="nav-item" data-view="dashboard"><div class="nav-dot" style="background:var(--accent-sage)"></div>任務清單</div>
+      <div class="nav-item" data-view="dashboard"><div class="nav-dot" style="background:var(--accent-gold)"></div>長期目標</div>
+      <div class="nav-item" data-view="dashboard"><div class="nav-dot" style="background:var(--accent-dusty)"></div>心情紀錄</div>
+      <div class="nav-item" data-view="settings"><div class="nav-dot" style="background:var(--text-muted)"></div>⚙️ 設定</div>
+    </div>
+    <div style="padding:0 16px 8px">
+      <div class="sidebar-label" style="padding:0 4px 8px">今天心情</div>
+      <div class="mood-card">
+        <div class="mood-label">現在感覺如何？</div>
+        <div class="mood-emojis" id="mood-emojis">
+          <button class="mood-btn" data-score="1">😔</button>
+          <button class="mood-btn" data-score="2">😕</button>
+          <button class="mood-btn" data-score="3">😐</button>
+          <button class="mood-btn selected" data-score="4">🙂</button>
+          <button class="mood-btn" data-score="5">😄</button>
+        </div>
+      </div>
+    </div>
+    <div class="streak-card">
+      <div class="streak-num" id="streak-num">—</div>
+      <div class="streak-text">天連續打卡 🔥</div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SYNC BAR -->
+    <div class="sync-bar">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-status">連線中…</span>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div class="dashboard" id="view-dashboard">
+      <div class="dash-header">
+        <div class="dash-date" id="date-display"></div>
+        <div class="dash-greeting">早安，佳穎 ☀️</div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid3">
+        <div class="stat-card coral">
+          <div class="stat-label">今日待辦</div>
+          <div class="stat-num" id="stat-tasks">—</div>
+          <div class="stat-sub" id="stat-tasks-sub">載入中</div>
+        </div>
+        <div class="stat-card sage">
+          <div class="stat-label">目標進行中</div>
+          <div class="stat-num" id="stat-goals">—</div>
+          <div class="stat-sub">長期目標數</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-label">心情紀錄</div>
+          <div class="stat-num" id="stat-mood">—</div>
+          <div class="stat-sub">本週筆數</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <!-- TASKS -->
+        <div class="card">
+          <div class="card-title">
+            <span>📋 今日任務</span>
+            <button class="add-btn" id="btn-add-task">＋ 新增</button>
+          </div>
+          <div id="task-list"><div class="loading">載入中…</div></div>
+        </div>
+
+        <!-- GOALS -->
+        <div class="card">
+          <div class="card-title">
+            <span>🎯 長期目標</span>
+            <button class="add-btn" id="btn-add-goal">＋ 新增</button>
+          </div>
+          <div id="goal-list"><div class="loading">載入中…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS VIEW (hidden by default) -->
+    <div class="settings-view" id="view-settings" style="display:none">
+      <h2>⚙️ 設定</h2>
+      <p class="settings-desc">填入你的 API 金鑰和 Google Sheet ID，毛毛先生就能正常運作了。所有資料只存在你的瀏覽器中，不會上傳到任何伺服器。</p>
+
+      <div class="settings-group">
+        <label class="settings-label">Google Sheet ID</label>
+        <input class="settings-input" id="cfg-sheet-id" placeholder="例如：1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
+        <div class="settings-hint">在 Google Sheets 網址中 /d/ 和 /edit 之間的那串文字</div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Google Sheets API Key</label>
+        <input class="settings-input" id="cfg-google-key" placeholder="例如：AIzaSyXXXXXXXXXXXXXXXXXXXXX" />
+        <div class="settings-hint">到 Google Cloud Console → APIs & Services → Credentials 建立</div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Anthropic API Key（聊天功能用）</label>
+        <input class="settings-input" id="cfg-anthropic-key" placeholder="例如：sk-ant-XXXXX" />
+        <div class="settings-hint">到 console.anthropic.com 建立 API Key</div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="settings-save" id="btn-settings-save">儲存設定</button>
+        <button class="settings-test" id="btn-settings-test">測試 Google Sheets 連線</button>
+      </div>
+      <div id="settings-status"></div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="chat-area" id="chat-area">
+      <div class="chat-header">
+        <div class="chat-avatar">🐾</div>
+        <div>
+          <div class="chat-name">毛毛先生</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg fade-in">
+          <div class="msg-av">🐾</div>
+          <div class="msg-bubble mao">早安佳穎！資料讀取中，稍等一下喔 🙂</div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chat-input" placeholder="跟毛毛先生說說話…（按兩下 Enter 送出）" />
+        <button class="send-btn" id="btn-send-chat">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD TASK MODAL -->
+<div class="modal-bg" id="modal-task" style="display:none">
+  <div class="modal">
+    <h3>新增任務</h3>
+    <input id="t-title" placeholder="任務名稱" />
+    <select id="t-priority">
+      <option value="高">高優先</option>
+      <option value="中" selected>中優先</option>
+      <option value="低">低優先</option>
+    </select>
+    <input id="t-due" type="date" />
+    <input id="t-notes" placeholder="備註（選填）" />
+    <div class="modal-btns">
+      <button class="btn-cancel" id="btn-cancel-task">取消</button>
+      <button class="btn-confirm" id="btn-confirm-task">儲存到 Sheets</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD GOAL MODAL -->
+<div class="modal-bg" id="modal-goal" style="display:none">
+  <div class="modal">
+    <h3>新增目標</h3>
+    <input id="g-title" placeholder="目標名稱" />
+    <select id="g-category">
+      <option>健康</option><option>工作</option><option>學習</option><option>人際</option><option>財務</option><option>其他</option>
+    </select>
+    <input id="g-deadline" type="date" placeholder="截止日期（選填）" />
+    <div class="modal-btns">
+      <button class="btn-cancel" id="btn-cancel-goal">取消</button>
+      <button class="btn-confirm" id="btn-confirm-goal">儲存到 Sheets</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
