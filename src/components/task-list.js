@@ -36,6 +36,7 @@ export async function loadTasks() {
             ${due ? `<span class="task-due">${esc(due)}</span>` : ''}
           </div>
         </div>
+        ${!isDone ? `<button class="task-pomo" data-task-id="${esc(id)}" data-task-title="${esc(title)}" title="開始番茄鐘">🍅</button>` : ''}
         <button class="task-delete" data-task-id="${esc(id)}" title="刪除">×</button>`
       list.appendChild(item)
     })
@@ -61,6 +62,12 @@ function updateStats(total, done) {
 export function initTaskEvents() {
   const list = document.getElementById('task-list')
   list.addEventListener('click', async (e) => {
+    const pomo = e.target.closest('.task-pomo')
+    if (pomo) {
+      const { startPomodoro } = await import('./pomodoro.js')
+      startPomodoro(pomo.dataset.taskId, pomo.dataset.taskTitle)
+      return
+    }
     const del = e.target.closest('.task-delete')
     if (del) { await handleDelete(del.dataset.taskId); return }
     const chk = e.target.closest('.task-check')

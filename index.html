@@ -189,6 +189,21 @@
       <div id="settings-status"></div>
     </div>
 
+    <!-- POMODORO BAR (hidden until active) -->
+    <div class="pomo-bar" id="pomo-bar" style="display:none">
+      <span class="pomo-emoji">🍅</span>
+      <div class="pomo-info">
+        <span class="pomo-phase" id="pomo-phase">專注中</span>
+        <span class="pomo-task-name" id="pomo-task-name"></span>
+      </div>
+      <div class="pomo-track">
+        <div class="pomo-fill" id="pomo-progress-fill"></div>
+      </div>
+      <span class="pomo-time" id="pomo-time">25:00</span>
+      <button class="pomo-btn" id="pomo-pause" title="暫停/繼續">⏸</button>
+      <button class="pomo-btn pomo-btn-stop" id="pomo-stop" title="取消">✕</button>
+    </div>
+
     <!-- CHAT -->
     <div class="chat-area" id="chat-area">
       <div class="chat-header">

@@ -7,6 +7,7 @@ import './styles/goals.css'
 import './styles/chat.css'
 import './styles/modal.css'
 import './styles/settings.css'
+import './styles/pomodoro.css'
 import './styles/responsive.css'
 
 import { initDashboard } from './components/dashboard.js'
@@ -19,6 +20,7 @@ import { setSyncStatus } from './components/sync-bar.js'
 import { isConfigured } from './services/config.js'
 import { generateMorningBrief } from './services/anthropic.js'
 import { initNotifications, checkDueTasks } from './services/notifications.js'
+import { initPomodoroEvents } from './components/pomodoro.js'
 import { formatDate } from './utils/helpers.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -28,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initChatEvents()
   initSidebarEvents()
   initSettingsEvents()
+  initPomodoroEvents()
 
   if (showSettingsIfNeeded()) {
     appendMsg('mao', '歡迎使用毛毛先生！請先到設定頁面填入你的 API 金鑰 🐾')
