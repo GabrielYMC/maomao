@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>毛毛先生</title>
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#FAF7F2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="/icons/icon-192.svg">
+<link rel="apple-touch-icon" href="./icons/icon-192.svg">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -47,8 +47,11 @@
           <button class="mood-btn" data-score="1">😔</button>
           <button class="mood-btn" data-score="2">😕</button>
           <button class="mood-btn" data-score="3">😐</button>
-          <button class="mood-btn selected" data-score="4">🙂</button>
+          <button class="mood-btn" data-score="4">🙂</button>
           <button class="mood-btn" data-score="5">😄</button>
+        </div>
+        <div class="mood-note-area" id="mood-note-area" style="display:none">
+          <input class="mood-note-input" id="mood-note-input" maxlength="60" placeholder="想說什麼？（Enter 儲存）" />
         </div>
       </div>
     </div>
@@ -70,8 +73,11 @@
     <!-- DASHBOARD VIEW -->
     <div class="dashboard" id="view-dashboard">
       <div class="dash-header">
-        <div class="dash-date" id="date-display"></div>
-        <div class="dash-greeting">早安，佳穎 ☀️</div>
+        <div>
+          <div class="dash-date" id="date-display"></div>
+          <div class="dash-greeting">早安，佳穎 ☀️</div>
+        </div>
+        <button class="weekly-review-btn" id="btn-weekly-review">📊 週報</button>
       </div>
 
       <!-- STATS -->
@@ -137,6 +143,12 @@
         <div class="settings-hint">到 console.anthropic.com 建立 API Key</div>
       </div>
 
+      <div class="settings-group">
+        <label class="settings-label">Google Apps Script 網址（新增／刪除／更新資料用）</label>
+        <input class="settings-input" id="cfg-script-url" placeholder="例如：https://script.google.com/macros/s/xxx/exec" />
+        <div class="settings-hint">部署 <code>apps-script-template.js</code> 後取得的網址，用於所有寫入操作。<a href="https://script.google.com" target="_blank" rel="noopener">前往 Apps Script</a></div>
+      </div>
+
       <div class="settings-actions">
         <button class="settings-save" id="btn-settings-save">儲存設定</button>
         <button class="settings-test" id="btn-settings-test">測試 Google Sheets 連線</button>
@@ -159,7 +171,7 @@
         </div>
       </div>
       <div class="chat-input-row">
-        <input class="chat-input" id="chat-input" placeholder="跟毛毛先生說說話…（按兩下 Enter 送出）" />
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="跟毛毛先生說說話…（Enter 送出，Shift+Enter 換行）"></textarea>
         <button class="send-btn" id="btn-send-chat">➤</button>
       </div>
     </div>
@@ -177,6 +189,12 @@
       <option value="低">低優先</option>
     </select>
     <input id="t-due" type="date" />
+    <select id="t-repeat">
+      <option value="">不重複</option>
+      <option value="daily">每天重複</option>
+      <option value="weekly">每週重複</option>
+      <option value="monthly">每月重複</option>
+    </select>
     <input id="t-notes" placeholder="備註（選填）" />
     <div class="modal-btns">
       <button class="btn-cancel" id="btn-cancel-task">取消</button>
@@ -197,6 +215,20 @@
     <div class="modal-btns">
       <button class="btn-cancel" id="btn-cancel-goal">取消</button>
       <button class="btn-confirm" id="btn-confirm-goal">儲存到 Sheets</button>
+    </div>
+  </div>
+</div>
+
+<!-- UPDATE GOAL PROGRESS MODAL -->
+<div class="modal-bg" id="modal-goal-update" style="display:none">
+  <div class="modal">
+    <h3>更新目標進度</h3>
+    <input type="hidden" id="gu-id" />
+    <label class="settings-label" style="display:block;margin-bottom:6px">完成進度（0 ~ 100%）</label>
+    <input id="gu-progress" type="number" min="0" max="100" placeholder="輸入 0-100" />
+    <div class="modal-btns">
+      <button class="btn-cancel" id="btn-cancel-goal-update">取消</button>
+      <button class="btn-confirm" id="btn-confirm-goal-update">更新進度</button>
     </div>
   </div>
 </div>

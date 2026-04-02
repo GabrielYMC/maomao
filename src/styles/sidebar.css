@@ -16,6 +16,9 @@
 .mood-btn { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid transparent; background: var(--cream2); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .mood-btn:hover { border-color: var(--warm-brown-light); }
 .mood-btn.selected { border-color: var(--accent-coral); background: #FFF0EB; }
+.mood-note-area { margin-top: 8px; }
+.mood-note-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--text-primary); outline: none; transition: border-color 0.15s; }
+.mood-note-input:focus { border-color: var(--accent-coral); }
 .streak-card { margin: 0 16px 16px; background: linear-gradient(135deg,#FFF5EE,#FFF0E8); border-radius: 12px; padding: 12px 14px; border: 1px solid rgba(224,123,90,0.2); }
 .streak-num { font-family: 'Noto Serif TC', serif; font-size: 28px; font-weight: 700; color: var(--accent-coral); line-height: 1; }
 .streak-text { font-size: 11px; color: var(--text-muted); margin-top: 2px; }

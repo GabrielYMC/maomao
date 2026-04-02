@@ -1,6 +1,7 @@
 /* TASKS */
 .task-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
 .task-item:last-child { border-bottom: none; }
+.task-body { flex: 1; min-width: 0; }
 .task-check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); cursor: pointer; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; background: white; }
 .task-check:hover { border-color: var(--accent-sage); }
 .task-check.done { background: var(--accent-sage); border-color: var(--accent-sage); }
@@ -13,3 +14,7 @@
 .tag-mid { background: #FFF8E6; color: var(--accent-gold); }
 .tag-low { background: #EEF5EF; color: var(--accent-sage); }
 .task-due { font-size: 11px; color: var(--text-muted); }
+.task-repeat { font-size: 10px; color: var(--accent-dusty); background: #FDF0F4; padding: 2px 6px; border-radius: 10px; }
+.task-delete { flex-shrink: 0; width: 24px; height: 24px; border: none; background: none; color: var(--text-muted); cursor: pointer; font-size: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s, background 0.15s, color 0.15s; margin-top: -2px; line-height: 1; }
+.task-item:hover .task-delete { opacity: 1; }
+.task-delete:hover { background: #FFF0EB; color: var(--accent-coral); }

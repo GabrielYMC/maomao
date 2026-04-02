@@ -1,9 +1,12 @@
 /* MAIN */
 .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .dashboard { flex: 1; overflow-y: auto; padding: 24px 28px; }
-.dash-header { margin-bottom: 20px; }
+.dash-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; }
 .dash-date { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
 .dash-greeting { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; }
+.weekly-review-btn { font-size: 11px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor: pointer; color: var(--text-secondary); font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s; flex-shrink: 0; margin-top: 4px; }
+.weekly-review-btn:hover { background: var(--cream2); border-color: var(--warm-brown-light); }
+.weekly-review-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .stat-card { background: white; border-radius: 14px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); }

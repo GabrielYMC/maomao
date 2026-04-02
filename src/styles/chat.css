@@ -1,9 +1,8 @@
 /* CHAT */
-.chat-area { height: 300px; flex-shrink: 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; background: #fff9f4; }
+.chat-area { height: 320px; flex-shrink: 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; background: #fff9f4; }
 .chat-header { padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; background: white; }
 .chat-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,#E07B5A,#C49A3C); display: flex; align-items: center; justify-content: center; font-size: 14px; }
 .chat-name { font-size: 13px; font-weight: 500; }
-.chat-status { font-size: 11px; color: var(--accent-sage); }
 .chat-messages { flex: 1; overflow-y: auto; padding: 12px 20px; display: flex; flex-direction: column; gap: 10px; }
 .msg { display: flex; gap: 8px; max-width: 80%; }
 .msg.user { align-self: flex-end; flex-direction: row-reverse; }
@@ -12,10 +11,10 @@
 .msg-bubble { padding: 8px 12px; border-radius: 14px; font-size: 13px; line-height: 1.6; }
 .msg-bubble.mao { background: white; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
 .msg-bubble.user { background: linear-gradient(135deg,#F5E6DB,#EDD9C8); border-bottom-right-radius: 4px; }
-.chat-input-row { padding: 10px 16px; display: flex; gap: 8px; background: white; border-top: 1px solid var(--border); }
-.chat-input { flex: 1; border: 1px solid var(--border); border-radius: 20px; padding: 8px 14px; font-size: 13px; font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--text-primary); outline: none; }
+.chat-input-row { padding: 10px 16px; display: flex; gap: 8px; align-items: flex-end; background: white; border-top: 1px solid var(--border); }
+.chat-input { flex: 1; border: 1px solid var(--border); border-radius: 12px; padding: 8px 14px; font-size: 13px; font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--text-primary); outline: none; resize: none; min-height: 36px; max-height: 120px; overflow-y: auto; line-height: 1.5; }
 .chat-input:focus { border-color: var(--warm-brown-light); }
-.send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: linear-gradient(135deg,#E07B5A,#C49A3C); color: white; cursor: pointer; font-size: 14px; flex-shrink: 0; }
+.send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: linear-gradient(135deg,#E07B5A,#C49A3C); color: white; cursor: pointer; font-size: 14px; flex-shrink: 0; transition: opacity 0.15s; }
 .send-btn:hover { opacity: 0.85; }
 
 .typing { display: flex; gap: 3px; align-items: center; padding: 4px 0; }
@@ -23,3 +22,12 @@
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+/* 任務新增確認氣泡 */
+.task-confirm { display: flex; flex-direction: column; gap: 6px; }
+.task-confirm-label { font-size: 12px; color: var(--text-muted); }
+.task-confirm-info { font-size: 13px; font-weight: 500; }
+.task-confirm-btns { display: flex; gap: 6px; margin-top: 4px; }
+.btn-tc-yes { padding: 4px 12px; border-radius: 6px; border: none; background: var(--accent-sage); color: white; font-size: 12px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; transition: opacity 0.15s; }
+.btn-tc-yes:hover { opacity: 0.85; }
+.btn-tc-no { padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); background: white; font-size: 12px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; }

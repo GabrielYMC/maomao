@@ -2,11 +2,11 @@ import { getConfig, saveConfig } from '../services/config.js'
 import { sheetGet } from '../services/sheets.js'
 
 export function initSettingsEvents() {
-  // Load existing config into form
   const cfg = getConfig()
   document.getElementById('cfg-sheet-id').value = cfg.sheetId
   document.getElementById('cfg-google-key').value = cfg.googleApiKey
   document.getElementById('cfg-anthropic-key').value = cfg.anthropicApiKey
+  document.getElementById('cfg-script-url').value = cfg.scriptUrl
 
   document.getElementById('btn-settings-save').addEventListener('click', handleSave)
   document.getElementById('btn-settings-test').addEventListener('click', handleTest)
@@ -23,6 +23,7 @@ function handleSave() {
     sheetId: document.getElementById('cfg-sheet-id').value.trim(),
     googleApiKey: document.getElementById('cfg-google-key').value.trim(),
     anthropicApiKey: document.getElementById('cfg-anthropic-key').value.trim(),
+    scriptUrl: document.getElementById('cfg-script-url').value.trim(),
   })
   showStatus('設定已儲存！重新載入頁面即可生效。', 'success')
 }
@@ -36,17 +37,17 @@ async function handleTest() {
     return
   }
 
-  // Temporarily save to test
   saveConfig({
     sheetId,
     googleApiKey: googleKey,
     anthropicApiKey: document.getElementById('cfg-anthropic-key').value.trim(),
+    scriptUrl: document.getElementById('cfg-script-url').value.trim(),
   })
 
   try {
     showStatus('測試連線中…', 'success')
     await sheetGet('Tasks!A1:A1')
-    showStatus('連線成功！Google Sheets 可正常讀取。', 'success')
+    showStatus('✓ 連線成功！Google Sheets 可正常讀取。', 'success')
   } catch (e) {
     showStatus(`連線失敗：${e.message}`, 'error')
   }
@@ -58,7 +59,6 @@ export function showSettingsIfNeeded() {
     document.getElementById('view-dashboard').style.display = 'none'
     document.getElementById('view-settings').style.display = ''
     document.getElementById('chat-area').style.display = 'none'
-    // Highlight settings nav
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'))
     document.querySelector('.nav-item[data-view="settings"]').classList.add('active')
     return true
