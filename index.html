@@ -123,30 +123,63 @@
     <!-- SETTINGS VIEW (hidden by default) -->
     <div class="settings-view" id="view-settings" style="display:none">
       <h2>⚙️ 設定</h2>
-      <p class="settings-desc">填入你的 API 金鑰和 Google Sheet ID，毛毛先生就能正常運作了。所有資料只存在你的瀏覽器中，不會上傳到任何伺服器。</p>
+      <p class="settings-desc">所有 API 金鑰只存在你的瀏覽器中，不會上傳到任何伺服器。</p>
 
-      <div class="settings-group">
-        <label class="settings-label">Google Sheet ID</label>
-        <input class="settings-input" id="cfg-sheet-id" placeholder="例如：1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
-        <div class="settings-hint">在 Google Sheets 網址中 /d/ 和 /edit 之間的那串文字</div>
+      <!-- ── Google 設定群組 ── -->
+      <div class="settings-card settings-card--google">
+        <div class="settings-card-header">
+          <span class="settings-card-badge">G</span>
+          <div>
+            <div class="settings-card-title">Google 資料設定</div>
+            <div class="settings-card-sub">試算表讀取 · 資料寫入</div>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <label class="settings-label">Google Sheet ID</label>
+          <input class="settings-input" id="cfg-sheet-id" placeholder="例如：1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
+          <div class="settings-hint">試算表網址中 <code>/d/</code> 和 <code>/edit</code> 之間的那串文字</div>
+        </div>
+
+        <div class="settings-group">
+          <label class="settings-label">Google Sheets API Key <span class="settings-badge-tag">讀取用</span></label>
+          <input class="settings-input" id="cfg-google-key" placeholder="例如：AIzaSyXXXXXXXXXXXXXXXXXXXXX" />
+          <div class="settings-hint">Google Cloud Console → APIs &amp; Services → Credentials → Create API Key</div>
+        </div>
+
+        <div class="settings-group" style="margin-bottom:0">
+          <label class="settings-label">Google Apps Script 網址 <span class="settings-badge-tag">寫入用</span></label>
+          <input class="settings-input" id="cfg-script-url" placeholder="例如：https://script.google.com/macros/s/xxx/exec" />
+          <div class="settings-hint">將 <code>apps-script-template.js</code> 部署為 Web App 後取得的網址</div>
+        </div>
+
+        <div class="settings-card-links">
+          <a href="https://sheets.new" target="_blank" rel="noopener" class="settings-card-link">📋 建立試算表</a>
+          <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener" class="settings-card-link">🔑 取得 API Key</a>
+          <a href="https://script.google.com" target="_blank" rel="noopener" class="settings-card-link">⚙️ 部署 Apps Script</a>
+          <a href="./docs/deployment.md" target="_blank" rel="noopener" class="settings-card-link">📖 完整教學</a>
+        </div>
       </div>
 
-      <div class="settings-group">
-        <label class="settings-label">Google Sheets API Key</label>
-        <input class="settings-input" id="cfg-google-key" placeholder="例如：AIzaSyXXXXXXXXXXXXXXXXXXXXX" />
-        <div class="settings-hint">到 Google Cloud Console → APIs & Services → Credentials 建立</div>
-      </div>
+      <!-- ── Anthropic 設定 ── -->
+      <div class="settings-card settings-card--ai">
+        <div class="settings-card-header">
+          <span class="settings-card-badge settings-card-badge--ai">AI</span>
+          <div>
+            <div class="settings-card-title">AI 聊天設定</div>
+            <div class="settings-card-sub">晨間簡報 · 對話 · 週報（選填）</div>
+          </div>
+        </div>
 
-      <div class="settings-group">
-        <label class="settings-label">Anthropic API Key（聊天功能用）</label>
-        <input class="settings-input" id="cfg-anthropic-key" placeholder="例如：sk-ant-XXXXX" />
-        <div class="settings-hint">到 console.anthropic.com 建立 API Key</div>
-      </div>
+        <div class="settings-group" style="margin-bottom:0">
+          <label class="settings-label">Anthropic API Key</label>
+          <input class="settings-input" id="cfg-anthropic-key" placeholder="例如：sk-ant-XXXXX" />
+          <div class="settings-hint">不設定時 AI 功能不可用，其他功能照常運作</div>
+        </div>
 
-      <div class="settings-group">
-        <label class="settings-label">Google Apps Script 網址（新增／刪除／更新資料用）</label>
-        <input class="settings-input" id="cfg-script-url" placeholder="例如：https://script.google.com/macros/s/xxx/exec" />
-        <div class="settings-hint">部署 <code>apps-script-template.js</code> 後取得的網址，用於所有寫入操作。<a href="https://script.google.com" target="_blank" rel="noopener">前往 Apps Script</a></div>
+        <div class="settings-card-links">
+          <a href="https://console.anthropic.com" target="_blank" rel="noopener" class="settings-card-link">🔑 取得 Anthropic Key</a>
+        </div>
       </div>
 
       <div class="settings-actions">
